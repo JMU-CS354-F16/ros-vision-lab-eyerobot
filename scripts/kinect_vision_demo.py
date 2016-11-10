@@ -46,6 +46,9 @@ class RedNode(object):
         img_msg_out = self.cv_bridge.cv2_to_imgmsg(cv_img, "bgr8")
         self.image_pub.publish(img_msg_out)
 
+def find_reddest_pixel_fast (img):
+    img = np.array(img,dtype=int)
+    return cv2.minMaxLoc(2*img[:,:,2]-img[:,:,1]-img[:,:,0])[3]
 
 if __name__ == "__main__":
     r = RedNode()
